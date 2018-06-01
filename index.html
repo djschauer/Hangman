@@ -38,7 +38,7 @@
                         <!-- Losses: -->
                     <!-- </li> -->
                     <li class="list-group-item" id= "guessesRemaining">
-                        Guesses Remaining: 12
+                        Mistakes Remaining: 9
                     </li>
                 </ul>
             </div>
@@ -90,7 +90,9 @@
 
     var chosenWord = wordBank[Math.floor(Math.random() * wordBank.length)];
     var answer = [];
-    var guessesRemaining = 12;
+    var guessesRemaining = 9;
+    var wordComplete = false;
+    var remainingLetters = chosenWord.length;
     // var wins = 0;
     // var losses = 0;
 
@@ -98,7 +100,6 @@
         answer[i] = " _ ";
         $("#chosenWord").append(answer[i]);
     }
-    for (var i = 0; i < guessesRemaining; i++) {
 
         document.onkeyup = function(event) {
             var userGuess = event.key;
@@ -109,32 +110,28 @@
                     answer[i] = userGuess;
                     $("#chosenWord").text(answer);
                     correctLetter = true;
+                    remainingLetters--
                 }
-                // else {
-                    // guessesRemaining--;
-                    // $("#guessesRemaining").text("Guesses Remaining: " + guessesRemaining)
-                    // console.log(guessesRemaining);
-                    // break;
-                // }
+                
+                if (remainingLetters === 0) {
+                    wordComplete = true;
+                }
 
-            }
+                }
             if (correctLetter === false) {
                 guessesRemaining--;
                 console.log(guessesRemaining);
-                $("#guessesRemaining").text("Guesses Remaining: " + guessesRemaining);
+                $("#guessesRemaining").text("Mistakes Remaining: " + guessesRemaining);
             }
-        if (guessesRemaining === 0) {
-            alert("Odin has taken your life as repentence for your failure! (refresh to start over)")
+            if (guessesRemaining === 0) {
+                alert("Odin has taken your life as repentence for your failure! (refresh to start over)")
             // losses++
-        }
+            }
         
+            if (wordComplete) {
+                alert("You have solved the great word puzzle. You may join Odin and his Valkyrie in the great mead halls of Valhalla! (refresh to play again!)")
+            }
         }
-
-    }
-
-
-
-
 
     });
     
