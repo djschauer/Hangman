@@ -124,11 +124,13 @@
                 $("#guessesRemaining").text("Mistakes Remaining: " + guessesRemaining);
             }
             if (guessesRemaining === 0) {
+                $("#chosenWord").text(chosenWord)
                 alert("Odin has taken your life as repentence for your failure! (refresh to start over)")
             // losses++
             }
         
             if (wordComplete) {
+                $("#chosenWord").text(chosenWord)
                 alert("You have solved the great word puzzle. You may join Odin and his Valkyrie in the great mead halls of Valhalla! (refresh to play again!)")
             }
         }
